@@ -2,8 +2,8 @@ function saveAircraft(event) {
   event.preventDefault();
 
   const aircraft = getFormData($('#aircraftForm'));
-  
-  if(aircraft.id != undefined) {
+
+  if(aircraft.id != "") {
     updateAircraft(aircraft, event);
   } else {
     addAircraft(aircraft, event);
@@ -16,7 +16,7 @@ function addAircraft(aircraft, event) {
   $.ajax({
     url: 'http://localhost:8080/aeronaves/',
     type: 'POST',
-    data: aircraft,
+    data: JSON.stringify(aircraft),
     contentType: 'application/json',
     success: function() {
       toastr["success"]("Aircraft saved successfully!")
